@@ -1,6 +1,7 @@
 from serial import Serial
 from re import match
 from datetime import datetime, timedelta
+from time import sleep
 from phue import Bridge
 
 
@@ -46,4 +47,5 @@ while True:
 
     if line.startswith("b'!"):
         plug(dictionary)
+        sleep(5)
         continue
