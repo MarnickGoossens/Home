@@ -25,7 +25,7 @@ while True:
         code = m.group(1)
         waarde = m.group(2)
         if code in codes:
-            dictionary[code] = waarde
+            dictionary[code] = float(waarde)
 
     if line.startswith("b'!"):
         plug(dictionary)
