@@ -14,8 +14,8 @@ dictionary = {}
 
 
 def plug(dictionary):
-    verbruik = dictionary["1-0:1.7.0"] - dictionary["1-0:2.7.0"]
-    print(verbruik)
+    verbruik = (dictionary["1-0:1.7.0"] - dictionary["1-0:2.7.0"]) * 1000
+    print(verbruik, "W")
 
 
 while True:
