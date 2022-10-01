@@ -24,7 +24,7 @@ while True:
     if m:
         code = m.group(1)
         waarde = m.group(2)
-        if code in code_verbruik:
+        if code in codes:
             dictionary[code] = waarde
 
     if line.startswith("b'!"):
