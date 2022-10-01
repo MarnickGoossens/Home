@@ -21,7 +21,7 @@ codes = ["1-0:1.7.0", "1-0:2.7.0"]
 dictionary = {}
 
 
-def plug(dictionary):
+def plug(dictionary, tijd_on):
     verbruik = int(dictionary["1-0:1.7.0"] - dictionary["1-0:2.7.0"])
     sc1_status = b.get_light("sc1")["state"]["on"]
 
@@ -46,6 +46,6 @@ while True:
             dictionary[code] = float(waarde) * 1000
 
     if line.startswith("b'!"):
-        plug(dictionary)
+        plug(dictionary, tijd_on)
         sleep(5)
         continue
