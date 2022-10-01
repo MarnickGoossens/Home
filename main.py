@@ -5,7 +5,7 @@ from time import sleep
 from phue import Bridge
 
 
-verbruik_aan = 1000
+verbruik_aan = 700
 minimum_tijd_aan = 2
 
 
@@ -16,7 +16,7 @@ ip_hue = "192.168.0.223"
 b = Bridge(ip_hue)
 b.connect()
 
-tijd_on = None
+tijd_on = datetime.now()
 codes = ["1-0:1.7.0", "1-0:2.7.0"]
 dictionary = {}
 
