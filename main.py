@@ -5,9 +5,8 @@ from time import sleep
 from phue import Bridge
 
 
-verbruik_aan = 700
-minimum_tijd_aan = 2
-
+verbruik_aan = -700
+verbruik_uit = -50
 
 ser = Serial(port="/dev/ttyUSB0", baudrate=115200)
 regularExpression = "b'(1-0:\d.7.0)\((\d{2}.\d{3}).*'"
@@ -21,18 +20,14 @@ codes = ["1-0:1.7.0", "1-0:2.7.0"]
 dictionary = {}
 
 
-def plug(dictionary, tijd_on):
+def plug(dictionary):
     verbruik = int(dictionary["1-0:1.7.0"] - dictionary["1-0:2.7.0"])
     sc1_status = b.get_light("sc1")["state"]["on"]
 
-    if not sc1_status and verbruik >= verbruik_aan:
+    if not sc1_status and verbruik < verbruik_aan:
         b.set_light("sc1", "on", True)
         tijd_on = datetime.now()
-    elif (
-        sc1_status
-        and tijd_on + timedelta(minutes=minimum_tijd_aan) < datetime.now()
-        and verbruik < verbruik_aan
-    ):
+    elif sc1_status and verbruik > verbruik_uit:
         b.set_light("sc1", "on", False)
 
 
@@ -46,6 +41,5 @@ while True:
             dictionary[code] = float(waarde) * 1000
 
     if line.startswith("b'!"):
-        plug(dictionary, tijd_on)
+        plug(dictionary)
         sleep(5)
-        continue
